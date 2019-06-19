@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SampleApplication</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+    <!-- Authentication screen strings -->
+    <string name="connect_request_permissions">Connect</string>
+    <string name="disconnect_from_neura">Disconnect</string>
+    <string name="neura_status">Neura status:</string>
+    <string name="neura_status_disconnected">Disconnected</string>
+    <string name="neura_status_connected">Connected</string>
+    <string name="sdk_version">NeuraSDK version:</string>
+    <string name="neura_id">Neura ID:</string>
+</resources>
