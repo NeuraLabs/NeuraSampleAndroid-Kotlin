@@ -2,8 +2,8 @@ package com.neura.sampleapplication.presentation.controllers.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import com.neura.sampleapplication.SampleApplication
+import com.neura.sampleapplication.common.helpers.PermissionHelperImpl
 import com.neura.sampleapplication.dependencyinjection.ControllerCompositionRoot
-import com.neura.sampleapplication.helpers.common.PermissionHelperImpl
 
 abstract class BaseActivity : AppCompatActivity() {
 

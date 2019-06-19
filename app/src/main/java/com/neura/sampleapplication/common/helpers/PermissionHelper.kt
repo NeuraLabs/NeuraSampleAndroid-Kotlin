@@ -1,4 +1,4 @@
-package com.neura.sampleapplication.helpers.common
+package com.neura.sampleapplication.common.helpers
 
 import android.app.Activity
 import android.content.Context

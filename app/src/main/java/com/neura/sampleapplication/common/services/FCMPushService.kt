@@ -18,7 +18,7 @@ class FCMPushService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage?) {
-        /* It is important to call isNeuraPush even if you are not register to ant event,
+        /* It is important to call isNeuraPush even if you are not register to any event,
          Neura Authentication flow is dependant on authentication push. */
         val isNeuraPush = NeuraPushCommandFactory.getInstance()
             .isNeuraPush(applicationContext, message?.data, object : NeuraEventCallBack {

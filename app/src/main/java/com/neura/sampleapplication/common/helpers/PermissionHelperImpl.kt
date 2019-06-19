@@ -1,11 +1,11 @@
-package com.neura.sampleapplication.helpers.common
+package com.neura.sampleapplication.common.helpers
 
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 
-class PermissionHelperImpl() : PermissionHelper {
+class PermissionHelperImpl : PermissionHelper {
 
     /**
      * check if the passed permissions are granted.
