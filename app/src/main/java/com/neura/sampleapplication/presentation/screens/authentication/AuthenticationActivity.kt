@@ -1,12 +1,14 @@
 package com.neura.sampleapplication.presentation.screens.authentication
 
-import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest.permission.*
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import com.neura.resources.user.UserDetails
 import com.neura.resources.user.UserDetailsCallbacks
 import com.neura.sampleapplication.R
+
+import com.neura.sampleapplication.common.helpers.PermissionHelperImpl
 import com.neura.sampleapplication.neura.NeuraHelper
 import com.neura.sampleapplication.presentation.controllers.activities.BaseActivity
 
@@ -15,6 +17,7 @@ class AuthenticationActivity : BaseActivity(), AuthenticationViewMvc.Listener, N
 
     companion object {
         const val LOC_PERMISSION_REQUEST_CODE = 111
+        const val ACTIVITY_RECOGNITION_REQUEST_CODE = 222
         const val TAG = "AuthenticationActivity"
     }
 
@@ -22,7 +25,7 @@ class AuthenticationActivity : BaseActivity(), AuthenticationViewMvc.Listener, N
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestPermission(arrayOf(ACCESS_FINE_LOCATION), LOC_PERMISSION_REQUEST_CODE)
+        requestLocPermission()
         mViewMvc = getCompositionRoot().getViewMvcFactory().getAuthenticationViewMvc(null)
         initMvcView()
         setContentView(mViewMvc.getRootView())
@@ -59,6 +62,18 @@ class AuthenticationActivity : BaseActivity(), AuthenticationViewMvc.Listener, N
         getCompositionRoot().getNeuraHelper().getUserDetails(this)
     }
 
+    private fun requestLocPermission(){
+        val hasForegroundPermission = PermissionHelperImpl().isPermissionGranted(this, arrayOf(ACCESS_FINE_LOCATION))
+        if(hasForegroundPermission){
+            val hasBackgroundPermission = PermissionHelperImpl().isPermissionGranted(this, arrayOf(ACCESS_BACKGROUND_LOCATION))
+            if(!hasBackgroundPermission){
+                requestPermission(arrayOf(ACCESS_BACKGROUND_LOCATION), LOC_PERMISSION_REQUEST_CODE)
+            }
+        } else{
+            requestPermission(arrayOf(ACCESS_FINE_LOCATION, ACCESS_BACKGROUND_LOCATION), LOC_PERMISSION_REQUEST_CODE)
+        }
+    }
+
     override fun authenticationFailed(reason: String) {
         mViewMvc.removeProgressBar()
     }
@@ -79,6 +94,7 @@ class AuthenticationActivity : BaseActivity(), AuthenticationViewMvc.Listener, N
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOC_PERMISSION_REQUEST_CODE) {
             // handle loc permission result if needed.
+            requestPermission(arrayOf(ACTIVITY_RECOGNITION), ACTIVITY_RECOGNITION_REQUEST_CODE)
         }
     }
 }

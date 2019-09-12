@@ -3,6 +3,11 @@
           package="com.neura.sampleapplication">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- Once you target Android 10 make sure you are adding the following permissions
+             Note that it is your responsibility to ask for location & Activity recognition runtime permission-->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
 
     <application
             android:allowBackup="true"
